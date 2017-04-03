@@ -1,77 +1,21 @@
-var React= require('react');
+var React = require('react');
 
-// var eqPressed=this.props.eqPressed;
-var SimpleCalc= React.createClass({
-    getInitialState: function(){
-        return({
-            ans: '',
-            eqPressed: this.props.eqPressed
-        });
-    },
-    buttonClicked: function(e) { 
-        var btnVal= e.target.value;
-        var inputField= this.state.ans;
-        var {eqPressed} = this.state;
-        console.log(btnVal);
-
-        //if input starts with 0 or non numeric value
-        if(inputField===''){
-            if(btnVal==='0' || (isNaN(btnVal) && btnVal!==".")){
-                return null;
-            } else {
-                this.setState({ans : inputField+btnVal})
-            }
-        }
-        if(inputField!==''){
-
-            //check if only one operator exist at a time
-            if(isNaN(inputField.charAt(inputField.length-1)) && isNaN(btnVal)){
-                inputField=inputField.slice(0,inputField.length-1)
-                this.setState({ans:inputField+btnVal})
-            }
-
-            //if any operator is when eqPressed is true
-            if(eqPressed && (isNaN(btnVal) && btnVal!==".")){
-                this.setState({
-                    ans : inputField+btnVal,
-                    eqPressed: false
-                    
-                });
-            }
-
-            //if number is input when eqPressed is true
-            else if(eqPressed){
-                //if 0 is input directly after evaluating
-                if(btnVal==='0')
-                    return null;
-
-                inputField='';
-                this.clearBtn();   
-                this.setState({ans: inputField+btnVal});
-            }else
-            this.setState({ans: inputField+btnVal});
-        }   
-    },
-    clearBtn: function(){
-        this.setState({
-            ans: '',
-            eqPressed: false
-        });
+var SimpleCalc = React.createClass({
+     buttonClicked: function (e) {
+        var btnVal = e.target.value;
+        this.props.onBtnClick(btnVal);
     },
     eqBtn: function(){
-        this.setState({
-            ans: eval(this.state.ans).toString(),
-            eqPressed: true
-        });
+        this.props.onEqBtn();
     },
-    render: function(){
+    clearBtn:function(){
+        this.props.onClrBtn();
+    },
+    render: function () {
 
-        return(            
-                <table>
-                    <tbody>
-                    <tr>
-                        <td colSpan='4'> <input type="display" value={this.state.ans}/> </td> 
-                    </tr>
+        return (
+            <table>
+                <tbody>
                     <tr>
                         <td> <button value="1" onClick={this.buttonClicked}>1</button> </td>
                         <td> <button value="2" onClick={this.buttonClicked}>2</button> </td>
@@ -99,10 +43,10 @@ var SimpleCalc= React.createClass({
                     <tr>
                         <td colSpan="2"> <button value="=" onClick={this.eqBtn}>=</button> </td>
                     </tr>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
         );
     }
 });
 
-module.exports= SimpleCalc;
+module.exports = SimpleCalc;

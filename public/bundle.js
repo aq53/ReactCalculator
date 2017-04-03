@@ -50,8 +50,7 @@
 	var ReactDOM = __webpack_require__(158);
 	var CalculatorApp = __webpack_require__(159);
 
-	var eqPressed = false;
-	ReactDOM.render(React.createElement(CalculatorApp, { eqPressed: eqPressed }), document.getElementById("app"));
+	ReactDOM.render(React.createElement(CalculatorApp, null), document.getElementById("app"));
 
 /***/ },
 /* 1 */
@@ -19754,45 +19753,24 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+
 	var SimpleCalc = __webpack_require__(160);
+	var ScientificCalc = __webpack_require__(161);
+	var ShowResult = __webpack_require__(162);
 
 	var CalculatorApp = React.createClass({
 	    displayName: 'CalculatorApp',
 
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(SimpleCalc, { eqPressed: this.props.eqPressed })
-	        );
-	    }
-	});
-
-	module.exports = CalculatorApp;
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	// var eqPressed=this.props.eqPressed;
-	var SimpleCalc = React.createClass({
-	    displayName: 'SimpleCalc',
-
 	    getInitialState: function getInitialState() {
 	        return {
 	            ans: '',
-	            eqPressed: this.props.eqPressed
+	            eqPressed: false
 	        };
 	    },
-	    buttonClicked: function buttonClicked(e) {
-	        var btnVal = e.target.value;
-	        var inputField = this.state.ans;
+	    handleBtnClick: function handleBtnClick(btnVal) {
 	        var eqPressed = this.state.eqPressed;
 
+	        var inputField = this.state.ans;
 	        console.log(btnVal);
 
 	        //if input starts with 0 or non numeric value
@@ -19803,9 +19781,10 @@
 	                this.setState({ ans: inputField + btnVal });
 	            }
 	        }
+
 	        if (inputField !== '') {
 
-	            //check if only one operator exist at a time
+	            //check if only one operator exists at a time
 	            if (isNaN(inputField.charAt(inputField.length - 1)) && isNaN(btnVal)) {
 	                inputField = inputField.slice(0, inputField.length - 1);
 	                this.setState({ ans: inputField + btnVal });
@@ -19813,6 +19792,7 @@
 
 	            //if any operator is when eqPressed is true
 	            if (eqPressed && isNaN(btnVal) && btnVal !== ".") {
+
 	                this.setState({
 	                    ans: inputField + btnVal,
 	                    eqPressed: false
@@ -19826,247 +19806,276 @@
 	                    if (btnVal === '0') return null;
 
 	                    inputField = '';
-	                    this.clearBtn();
+	                    this.handleClrBtn();
 	                    this.setState({ ans: inputField + btnVal });
-	                } else this.setState({ ans: inputField + btnVal });
+	                } else {
+	                    this.setState({ ans: inputField + btnVal });
+	                }
 	        }
 	    },
-	    clearBtn: function clearBtn() {
+	    handleClrBtn: function handleClrBtn() {
 	        this.setState({
 	            ans: '',
 	            eqPressed: false
 	        });
 	    },
-	    eqBtn: function eqBtn() {
+	    handleEqBtn: function handleEqBtn() {
 	        this.setState({
 	            ans: eval(this.state.ans).toString(),
 	            eqPressed: true
 	        });
 	    },
 	    render: function render() {
+	        var eqPressed = this.state.eqPressed.eqPressed;
+
+	        var inputField = this.state.ans;
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(ShowResult, { inputField: inputField }),
+	            React.createElement(ScientificCalc, { onSciBtnClick: this.handleBtnClick }),
+	            React.createElement(SimpleCalc, { eqPressed: eqPressed, onBtnClick: this.handleBtnClick, onEqBtn: this.handleEqBtn,
+	                onClrBtn: this.handleClrBtn })
+	        );
+	    }
+	});
+
+	module.exports = CalculatorApp;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var SimpleCalc = React.createClass({
+	    displayName: "SimpleCalc",
+
+	    buttonClicked: function buttonClicked(e) {
+	        var btnVal = e.target.value;
+	        this.props.onBtnClick(btnVal);
+	    },
+	    eqBtn: function eqBtn() {
+	        this.props.onEqBtn();
+	    },
+	    clearBtn: function clearBtn() {
+	        this.props.onClrBtn();
+	    },
+	    render: function render() {
 
 	        return React.createElement(
-	            'table',
+	            "table",
 	            null,
 	            React.createElement(
-	                'tbody',
+	                "tbody",
 	                null,
 	                React.createElement(
-	                    'tr',
+	                    "tr",
 	                    null,
 	                    React.createElement(
-	                        'td',
-	                        { colSpan: '4' },
-	                        ' ',
-	                        React.createElement('input', { type: 'display', value: this.state.ans }),
-	                        ' '
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { value: "1", onClick: this.buttonClicked },
+	                            "1"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { value: "2", onClick: this.buttonClicked },
+	                            "2"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { value: "3", onClick: this.buttonClicked },
+	                            "3"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { value: "+", onClick: this.buttonClicked },
+	                            "+"
+	                        ),
+	                        " "
 	                    )
 	                ),
 	                React.createElement(
-	                    'tr',
+	                    "tr",
 	                    null,
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '1', onClick: this.buttonClicked },
-	                            '1'
+	                            "button",
+	                            { value: "4", onClick: this.buttonClicked },
+	                            "4"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '2', onClick: this.buttonClicked },
-	                            '2'
+	                            "button",
+	                            { value: "5", onClick: this.buttonClicked },
+	                            "5"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '3', onClick: this.buttonClicked },
-	                            '3'
+	                            "button",
+	                            { value: "6", onClick: this.buttonClicked },
+	                            "6"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '+', onClick: this.buttonClicked },
-	                            '+'
+	                            "button",
+	                            { value: "-", onClick: this.buttonClicked },
+	                            "-"
 	                        ),
-	                        ' '
+	                        " "
 	                    )
 	                ),
 	                React.createElement(
-	                    'tr',
+	                    "tr",
 	                    null,
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '4', onClick: this.buttonClicked },
-	                            '4'
+	                            "button",
+	                            { value: "7", onClick: this.buttonClicked },
+	                            "7"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '5', onClick: this.buttonClicked },
-	                            '5'
+	                            "button",
+	                            { value: "8", onClick: this.buttonClicked },
+	                            "8"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '6', onClick: this.buttonClicked },
-	                            '6'
+	                            "button",
+	                            { value: "9", onClick: this.buttonClicked },
+	                            "9"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '-', onClick: this.buttonClicked },
-	                            '-'
+	                            "button",
+	                            { value: "*", onClick: this.buttonClicked },
+	                            "x"
 	                        ),
-	                        ' '
+	                        " "
 	                    )
 	                ),
 	                React.createElement(
-	                    'tr',
+	                    "tr",
 	                    null,
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '7', onClick: this.buttonClicked },
-	                            '7'
+	                            "button",
+	                            { value: ".", onClick: this.buttonClicked },
+	                            "."
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '8', onClick: this.buttonClicked },
-	                            '8'
+	                            "button",
+	                            { value: "0", onClick: this.buttonClicked },
+	                            "0"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '9', onClick: this.buttonClicked },
-	                            '9'
+	                            "button",
+	                            { value: "C", onClick: this.clearBtn },
+	                            "C"
 	                        ),
-	                        ' '
+	                        " "
 	                    ),
 	                    React.createElement(
-	                        'td',
+	                        "td",
 	                        null,
-	                        ' ',
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '*', onClick: this.buttonClicked },
-	                            'x'
+	                            "button",
+	                            { value: "/", onClick: this.buttonClicked },
+	                            "/"
 	                        ),
-	                        ' '
+	                        " "
 	                    )
 	                ),
 	                React.createElement(
-	                    'tr',
+	                    "tr",
 	                    null,
 	                    React.createElement(
-	                        'td',
-	                        null,
-	                        ' ',
+	                        "td",
+	                        { colSpan: "2" },
+	                        " ",
 	                        React.createElement(
-	                            'button',
-	                            { value: '.', onClick: this.buttonClicked },
-	                            '.'
+	                            "button",
+	                            { value: "=", onClick: this.eqBtn },
+	                            "="
 	                        ),
-	                        ' '
-	                    ),
-	                    React.createElement(
-	                        'td',
-	                        null,
-	                        ' ',
-	                        React.createElement(
-	                            'button',
-	                            { value: '0', onClick: this.buttonClicked },
-	                            '0'
-	                        ),
-	                        ' '
-	                    ),
-	                    React.createElement(
-	                        'td',
-	                        null,
-	                        ' ',
-	                        React.createElement(
-	                            'button',
-	                            { value: 'C', onClick: this.clearBtn },
-	                            'C'
-	                        ),
-	                        ' '
-	                    ),
-	                    React.createElement(
-	                        'td',
-	                        null,
-	                        ' ',
-	                        React.createElement(
-	                            'button',
-	                            { value: '/', onClick: this.buttonClicked },
-	                            '/'
-	                        ),
-	                        ' '
-	                    )
-	                ),
-	                React.createElement(
-	                    'tr',
-	                    null,
-	                    React.createElement(
-	                        'td',
-	                        { colSpan: '2' },
-	                        ' ',
-	                        React.createElement(
-	                            'button',
-	                            { value: '=', onClick: this.eqBtn },
-	                            '='
-	                        ),
-	                        ' '
+	                        " "
 	                    )
 	                )
 	            )
@@ -20075,6 +20084,153 @@
 	});
 
 	module.exports = SimpleCalc;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var ScientificCalc = React.createClass({
+	    displayName: "ScientificCalc",
+
+	    buttonClicked: function buttonClicked(e) {
+	        var btnVal = e.target.value;
+	        this.props.onSciBtnClick(btnVal);
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            "table",
+	            null,
+	            React.createElement(
+	                "tbody",
+	                null,
+	                React.createElement(
+	                    "tr",
+	                    null,
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a", onClick: this.buttonClicked, value: "\u221A" },
+	                            "\u221A"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a", onClick: this.buttonClicked, value: "e" },
+	                            "e"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a", onClick: this.buttonClicked, value: "!" },
+	                            "!"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a", onClick: this.buttonClicked, value: "^2" },
+	                            "^2"
+	                        ),
+	                        " "
+	                    )
+	                ),
+	                React.createElement(
+	                    "tr",
+	                    null,
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a b", onClick: this.buttonClicked, value: "sin" },
+	                            "sin"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a b", onClick: this.buttonClicked, value: "cos" },
+	                            "cos"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a b", onClick: this.buttonClicked, value: "tan" },
+	                            "tan"
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        null,
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn a b", onClick: this.buttonClicked, value: "log" },
+	                            "log"
+	                        ),
+	                        " "
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ScientificCalc;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var ShowResult = React.createClass({
+	    displayName: "ShowResult",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement("input", { type: "display", value: this.props.inputField })
+	        );
+	    }
+	});
+
+	module.exports = ShowResult;
 
 /***/ }
 /******/ ]);
