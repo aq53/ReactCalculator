@@ -1,6 +1,60 @@
-.toggleF{
-    display: none;
+.page-title{
+    margin: 0;
+    text-align: center;
+    padding: 2rem 0;
 }
-.toggleT{
-    display:block;
+
+/*components styles*/
+.main-container{
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+    border-radius:5px;
+    padding:0;
+    margin-bottom:2rem;
+}
+.sub-container{
+    width:70%;
+    border:1px solid black;
+    margin: 0 auto;
+}
+.sub-container table td button{
+    width:50px;
+    height:50px;
+}
+.container__header{
+    border-bottom: 1px solid #eeeeee;
+    font-size: 16px;
+    width:100%;
+     text-align: right;
+    padding: 1rem;
+}
+
+/*todos styles*/
+.todo{
+    align-items: center;
+    cursor:pointer;
+    display: flex;
+    padding: 2rem;
+    transition: background .3s ease;
+}
+.todo p{
+    margin: 0;
+}
+.todo input{
+    margin: 0;
+    float: left;
+    margin-right: 10px; 
+}
+.todo:first-child{
+    margin-right: 1rem;
+}
+.todo:hover{
+    background: #f0f0f0;
+}
+.todo__subtext{
+    color:#999;
+}
+.todo-completed p{
+    color: #aaa;
+    text-decoration: line-through;
 }

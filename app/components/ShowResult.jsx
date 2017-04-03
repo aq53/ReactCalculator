@@ -4,7 +4,7 @@ var ShowResult = React.createClass({
     render: function () {
         return (
             <div>
-                <input type="display" value={this.props.inputField} />
+                <input className="container__header" type="display" value={this.props.inputField} />
             </div>
         );
     }

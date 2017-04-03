@@ -19764,7 +19764,8 @@
 	    getInitialState: function getInitialState() {
 	        return {
 	            ans: '',
-	            eqPressed: false
+	            eqPressed: false,
+	            sciCalc: false
 	        };
 	    },
 	    handleBtnClick: function handleBtnClick(btnVal) {
@@ -19813,6 +19814,45 @@
 	                }
 	        }
 	    },
+	    fact: function fact(num) {
+	        if (num === 0) {
+	            return 1;
+	        } else {
+	            return num * this.fact(num - 1);
+	        }
+	    },
+	    handleSciBtn: function handleSciBtn(btnVal) {
+	        console.log(btnVal);
+	        if (btnVal === "tan") this.setState({
+	            ans: Math.tan(eval(this.state.ans)).toString(),
+	            eqPressed: true
+	        });else if (btnVal === "cos") this.setState({
+	            ans: Math.cos(eval(this.state.ans)).toString(),
+	            eqPressed: true
+	        });else if (btnVal === "sin") this.setState({
+	            ans: Math.sin(eval(this.state.ans)).toString(),
+	            eqPressed: true
+	        });else if (btnVal === "log") this.setState({
+	            ans: Math.log(eval(this.state.ans)).toString(),
+	            eqPressed: true
+
+	        });else if (btnVal === "√") this.setState({
+	            ans: Math.sqrt(eval(this.state.ans)).toString(),
+	            eqPressed: true
+
+	        });else if (btnVal === "^2") this.setState({
+	            ans: Math.pow(eval(this.state.ans), 2).toString(),
+	            eqPressed: true
+
+	        });else if (btnVal === "e") this.setState({
+	            ans: Math.exp(eval(this.state.ans)).toString(),
+	            eqPressed: true
+
+	        });else if (btnVal === "!") this.setState({
+	            ans: this.fact(eval(this.state.ans)).toString(),
+	            eqPressed: true
+	        });
+	    },
 	    handleClrBtn: function handleClrBtn() {
 	        this.setState({
 	            ans: '',
@@ -19825,6 +19865,13 @@
 	            eqPressed: true
 	        });
 	    },
+	    toggleCalculator: function toggleCalculator() {
+	        var sciCalc = this.state.sciCalc;
+
+	        this.setState({
+	            sciCalc: !sciCalc
+	        });
+	    },
 	    render: function render() {
 	        var eqPressed = this.state.eqPressed.eqPressed;
 
@@ -19832,10 +19879,32 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(ShowResult, { inputField: inputField }),
-	            React.createElement(ScientificCalc, { onSciBtnClick: this.handleBtnClick }),
-	            React.createElement(SimpleCalc, { eqPressed: eqPressed, onBtnClick: this.handleBtnClick, onEqBtn: this.handleEqBtn,
-	                onClrBtn: this.handleClrBtn })
+	            React.createElement(
+	                'h1',
+	                { className: 'page-title' },
+	                'Calculator App'
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'col-lg-4 col-md-offset-4' },
+	                    React.createElement(
+	                        'div',
+	                        { className: 'main-container' },
+	                        React.createElement(
+	                            'div',
+	                            { className: 'sub-container' },
+	                            React.createElement(ShowResult, { inputField: inputField }),
+	                            React.createElement('br', null),
+	                            this.state.sciCalc ? React.createElement(ScientificCalc, { onSciBtnClick: this.handleSciBtn }) : null,
+	                            React.createElement(SimpleCalc, { eqPressed: eqPressed, onBtnClick: this.handleBtnClick, onEqBtn: this.handleEqBtn,
+	                                onClrBtn: this.handleClrBtn, toggleCalculator: this.toggleCalculator })
+	                        )
+	                    )
+	                )
+	            )
 	        );
 	    }
 	});
@@ -19880,7 +19949,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "1", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "1", onClick: this.buttonClicked },
 	                            "1"
 	                        ),
 	                        " "
@@ -19891,7 +19960,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "2", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "2", onClick: this.buttonClicked },
 	                            "2"
 	                        ),
 	                        " "
@@ -19902,7 +19971,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "3", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "3", onClick: this.buttonClicked },
 	                            "3"
 	                        ),
 	                        " "
@@ -19913,7 +19982,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "+", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "+", onClick: this.buttonClicked },
 	                            "+"
 	                        ),
 	                        " "
@@ -19928,7 +19997,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "4", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "4", onClick: this.buttonClicked },
 	                            "4"
 	                        ),
 	                        " "
@@ -19939,7 +20008,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "5", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "5", onClick: this.buttonClicked },
 	                            "5"
 	                        ),
 	                        " "
@@ -19950,7 +20019,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "6", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "6", onClick: this.buttonClicked },
 	                            "6"
 	                        ),
 	                        " "
@@ -19961,7 +20030,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "-", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "-", onClick: this.buttonClicked },
 	                            "-"
 	                        ),
 	                        " "
@@ -19976,7 +20045,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "7", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "7", onClick: this.buttonClicked },
 	                            "7"
 	                        ),
 	                        " "
@@ -19987,7 +20056,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "8", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "8", onClick: this.buttonClicked },
 	                            "8"
 	                        ),
 	                        " "
@@ -19998,7 +20067,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "9", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "9", onClick: this.buttonClicked },
 	                            "9"
 	                        ),
 	                        " "
@@ -20009,7 +20078,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "*", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "*", onClick: this.buttonClicked },
 	                            "x"
 	                        ),
 	                        " "
@@ -20024,7 +20093,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: ".", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: ".", onClick: this.buttonClicked },
 	                            "."
 	                        ),
 	                        " "
@@ -20035,7 +20104,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "0", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "0", onClick: this.buttonClicked },
 	                            "0"
 	                        ),
 	                        " "
@@ -20046,7 +20115,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "C", onClick: this.clearBtn },
+	                            { className: "btn btn-primary", value: "C", onClick: this.clearBtn },
 	                            "C"
 	                        ),
 	                        " "
@@ -20057,7 +20126,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "/", onClick: this.buttonClicked },
+	                            { className: "btn btn-primary", value: "/", onClick: this.buttonClicked },
 	                            "/"
 	                        ),
 	                        " "
@@ -20072,8 +20141,19 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { value: "=", onClick: this.eqBtn },
+	                            { className: "btn btn-info", value: "=", onClick: this.eqBtn },
 	                            "="
+	                        ),
+	                        " "
+	                    ),
+	                    React.createElement(
+	                        "td",
+	                        { colSpan: "2" },
+	                        " ",
+	                        React.createElement(
+	                            "button",
+	                            { className: "btn btn-success", onClick: this.props.toggleCalculator },
+	                            "Sci Calc"
 	                        ),
 	                        " "
 	                    )
@@ -20225,7 +20305,7 @@
 	        return React.createElement(
 	            "div",
 	            null,
-	            React.createElement("input", { type: "display", value: this.props.inputField })
+	            React.createElement("input", { className: "container__header", type: "display", value: this.props.inputField })
 	        );
 	    }
 	});
