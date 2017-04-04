@@ -19897,7 +19897,6 @@
 	                            'div',
 	                            { className: 'sub-container' },
 	                            React.createElement(ShowResult, { inputField: inputField }),
-	                            React.createElement('br', null),
 	                            this.state.sciCalc ? React.createElement(ScientificCalc, { onSciBtnClick: this.handleSciBtn }) : null,
 	                            React.createElement(SimpleCalc, { eqPressed: eqPressed, onBtnClick: this.handleBtnClick, onEqBtn: this.handleEqBtn,
 	                                onClrBtn: this.handleClrBtn, toggleCalculator: this.toggleCalculator })
@@ -19939,7 +19938,7 @@
 	            null,
 	            React.createElement(
 	                "tbody",
-	                null,
+	                { className: "table" },
 	                React.createElement(
 	                    "tr",
 	                    null,
@@ -19949,7 +19948,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "1", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "1", onClick: this.buttonClicked },
 	                            "1"
 	                        ),
 	                        " "
@@ -19960,7 +19959,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "2", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "2", onClick: this.buttonClicked },
 	                            "2"
 	                        ),
 	                        " "
@@ -19971,7 +19970,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "3", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "3", onClick: this.buttonClicked },
 	                            "3"
 	                        ),
 	                        " "
@@ -19982,7 +19981,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "+", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Op", value: "+", onClick: this.buttonClicked },
 	                            "+"
 	                        ),
 	                        " "
@@ -19997,7 +19996,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "4", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "4", onClick: this.buttonClicked },
 	                            "4"
 	                        ),
 	                        " "
@@ -20008,7 +20007,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "5", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "5", onClick: this.buttonClicked },
 	                            "5"
 	                        ),
 	                        " "
@@ -20019,7 +20018,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "6", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "6", onClick: this.buttonClicked },
 	                            "6"
 	                        ),
 	                        " "
@@ -20030,7 +20029,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "-", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Op", value: "-", onClick: this.buttonClicked },
 	                            "-"
 	                        ),
 	                        " "
@@ -20045,7 +20044,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "7", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "7", onClick: this.buttonClicked },
 	                            "7"
 	                        ),
 	                        " "
@@ -20056,7 +20055,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "8", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "8", onClick: this.buttonClicked },
 	                            "8"
 	                        ),
 	                        " "
@@ -20067,7 +20066,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "9", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "9", onClick: this.buttonClicked },
 	                            "9"
 	                        ),
 	                        " "
@@ -20078,7 +20077,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "*", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Op", value: "*", onClick: this.buttonClicked },
 	                            "x"
 	                        ),
 	                        " "
@@ -20093,7 +20092,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: ".", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: ".", onClick: this.buttonClicked },
 	                            "."
 	                        ),
 	                        " "
@@ -20104,7 +20103,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "0", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Num", value: "0", onClick: this.buttonClicked },
 	                            "0"
 	                        ),
 	                        " "
@@ -20115,7 +20114,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "C", onClick: this.clearBtn },
+	                            { className: "btnT btn btn-Num", value: "C", onClick: this.clearBtn },
 	                            "C"
 	                        ),
 	                        " "
@@ -20126,7 +20125,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-primary", value: "/", onClick: this.buttonClicked },
+	                            { className: "btnT btn btn-Op", value: "/", onClick: this.buttonClicked },
 	                            "/"
 	                        ),
 	                        " "
@@ -20137,23 +20136,23 @@
 	                    null,
 	                    React.createElement(
 	                        "td",
-	                        { colSpan: "2" },
+	                        { colSpan: "3" },
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-info", value: "=", onClick: this.eqBtn },
-	                            "="
+	                            { className: "sciBtn btn btn-danger", onClick: this.props.toggleCalculator },
+	                            "Scientific Calculator"
 	                        ),
 	                        " "
 	                    ),
 	                    React.createElement(
 	                        "td",
-	                        { colSpan: "2" },
+	                        null,
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn btn-success", onClick: this.props.toggleCalculator },
-	                            "Sci Calc"
+	                            { className: "btnT btn btn-Op", value: "=", onClick: this.eqBtn },
+	                            "="
 	                        ),
 	                        " "
 	                    )
@@ -20196,7 +20195,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a", onClick: this.buttonClicked, value: "\u221A" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "\u221A" },
 	                            "\u221A"
 	                        ),
 	                        " "
@@ -20207,7 +20206,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a", onClick: this.buttonClicked, value: "e" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "e" },
 	                            "e"
 	                        ),
 	                        " "
@@ -20218,7 +20217,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a", onClick: this.buttonClicked, value: "!" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "!" },
 	                            "!"
 	                        ),
 	                        " "
@@ -20229,7 +20228,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a", onClick: this.buttonClicked, value: "^2" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "^2" },
 	                            "^2"
 	                        ),
 	                        " "
@@ -20244,7 +20243,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a b", onClick: this.buttonClicked, value: "sin" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "sin" },
 	                            "sin"
 	                        ),
 	                        " "
@@ -20255,7 +20254,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a b", onClick: this.buttonClicked, value: "cos" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "cos" },
 	                            "cos"
 	                        ),
 	                        " "
@@ -20266,7 +20265,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a b", onClick: this.buttonClicked, value: "tan" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "tan" },
 	                            "tan"
 	                        ),
 	                        " "
@@ -20277,7 +20276,7 @@
 	                        " ",
 	                        React.createElement(
 	                            "button",
-	                            { className: "btn a b", onClick: this.buttonClicked, value: "log" },
+	                            { className: "btnT btn btn-primary", onClick: this.buttonClicked, value: "log" },
 	                            "log"
 	                        ),
 	                        " "

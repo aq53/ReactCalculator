@@ -10,16 +10,16 @@ var ScientificCalc = React.createClass({
             <table>
                 <tbody>
                 <tr>
-                    <td> <button className="btn a" onClick={this.buttonClicked} value="√">√</button> </td>
-                    <td> <button className="btn a" onClick={this.buttonClicked} value="e">e</button> </td>
-                    <td> <button className="btn a" onClick={this.buttonClicked} value="!">!</button> </td>
-                    <td> <button className="btn a" onClick={this.buttonClicked} value="^2">^2</button> </td>
+                    <td> <button className="btnT btn btn-primary" onClick={this.buttonClicked} value="√">√</button> </td>
+                    <td> <button className="btnT btn btn-primary" onClick={this.buttonClicked} value="e">e</button> </td>
+                    <td> <button className="btnT btn btn-primary" onClick={this.buttonClicked} value="!">!</button> </td>
+                    <td> <button className="btnT btn btn-primary" onClick={this.buttonClicked} value="^2">^2</button> </td>
                 </tr>
                 <tr>
-                    <td> <button className="btn a b" onClick={this.buttonClicked} value="sin">sin</button> </td>
-                    <td> <button className="btn a b" onClick={this.buttonClicked} value="cos">cos</button> </td>
-                    <td> <button className="btn a b" onClick={this.buttonClicked} value="tan">tan</button> </td>
-                    <td> <button className="btn a b" onClick={this.buttonClicked} value="log">log</button> </td>
+                    <td> <button className="btnT btn btn-primary"onClick={this.buttonClicked} value="sin">sin</button> </td>
+                    <td> <button className="btnT btn btn-primary"onClick={this.buttonClicked} value="cos">cos</button> </td>
+                    <td> <button className="btnT btn btn-primary"onClick={this.buttonClicked} value="tan">tan</button> </td>
+                    <td> <button className="btnT btn btn-primary"onClick={this.buttonClicked} value="log">log</button> </td>
 
                 </tr>
                 </tbody>

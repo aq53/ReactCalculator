@@ -151,7 +151,6 @@ var CalculatorApp = React.createClass({
                         <div className="main-container">
                         <div className="sub-container">
                             <ShowResult inputField={inputField} />
-                            <br/>
                             {this.state.sciCalc ? <ScientificCalc onSciBtnClick={this.handleSciBtn} /> : null}
                             <SimpleCalc eqPressed={eqPressed} onBtnClick={this.handleBtnClick} onEqBtn={this.handleEqBtn}
                                 onClrBtn={this.handleClrBtn} toggleCalculator={this.toggleCalculator} />
